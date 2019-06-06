@@ -1,0 +1,56 @@
+module.exports = {
+  data: {
+    events: {
+      gCloud: {
+        bigQuery: {
+          table: 'events',
+          dateField: 'fullDate',
+        },
+      },
+    },
+    participations: {
+      gCloud: {
+        bigQuery: {
+          table: 'participations',
+          dateField: 'participationFullDate',
+        },
+      },
+    },
+  },
+  environments: {
+    test: {
+      gCloud: {
+        store: {
+          bucketName: 'quality',
+        },
+        bigQuery: {
+          dataset: 'Test',
+        },
+      },
+      database: {
+        host: 'XXX',
+        port: 'XXX',
+        database: 'XXX',
+        user: 'XXX',
+        password: 'XXX',
+      },
+    },
+    live: {
+      gCloud: {
+        store: {
+          bucketName: 'live',
+        },
+        bigQuery: {
+          dataset: 'Live',
+        },
+      },
+      database: {
+        host: 'XXX',
+        port: 'XXX',
+        database: 'XXX',
+        user: 'XXX',
+        password: 'XXX',
+      },
+    },
+  },
+}

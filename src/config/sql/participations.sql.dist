@@ -1,0 +1,5 @@
+SELECT param1 :: text AS param1, param2:: text AS param2 
+FROM myTable
+WHERE myTable."createdAt" >= ('#INI_DATE#') :: timestamp
+      AND myTable."createdAt" < ('#END_DATE#') :: timestamp
+ORDER BY myTable."createdAt" DESC

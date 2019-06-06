@@ -1,0 +1,6 @@
+
+SELECT param1 :: text AS param1, param2 :: text as param2
+FROM myTable
+where myTable.timestamp >= ('#INI_DATE#')::timestamp
+      AND myTable.timestamp < ('#END_DATE#')::timestamp
+ORDER BY myTable.id DESC
