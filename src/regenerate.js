@@ -201,7 +201,7 @@ async function checkFile(file) {
     debug(`${gap}${logSymbols.error} You need to create the file ${file.replace('./', './src/')}`)
     finishProcess()
   } else {
-    debug(`${gap}${logSymbols.success} You configuration file ${file.replace('./', './src/')} exists`)
+    debug(`${gap}${logSymbols.success} File ${file.replace('./', './src/')} exists`)
   }
 }
 async function checkFiles() {
