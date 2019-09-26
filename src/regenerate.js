@@ -48,7 +48,7 @@ function getParameters() {
     iniDate,
     iniDateString: iniDate.toISOString(),
     endDate,
-    endDateString: iniDate.toISOString(),
+    endDateString: endDate.toISOString(),
     environment,
     calculateBy,
   }
@@ -82,7 +82,7 @@ async function removeDataFromBQ(config, hourParams, type) {
   return res
 }
 
-async function createQuery(type, hourParams) {
+async function createQuery(type, hourParams, config) {
   // eslint-disable-next-line
   const file = path.join(__dirname, `./config/sql/${type}.sql`)
   const query = await fs
@@ -90,16 +90,18 @@ async function createQuery(type, hourParams) {
     .toString()
     .replace('#INI_DATE#', hourParams.iniDateString)
     .replace('#END_DATE#', hourParams.endDateString)
+    .replace('_MD5P_', config.md5p)
     .trim()
   return query
 }
 
-async function getData(type, hourParams) {
-  const query = await createQuery(type, hourParams)
+async function getData(type, hourParams, config) {
+  const query = await createQuery(type, hourParams, config)
   const results = await dbLib.executeQuery(query)
   const content = await transformQueryInData(results)
   debug(
-    `${gap}${gap}${logSymbols.success} Data obtained from psql [${content ? content.length : 0}]`
+    `${gap}${gap}${logSymbols.success} Data obtained from psql ` +
+      `[${results ? results.rows.length : 0}][${content ? content.length : 0}]`
   )
   return content
 }
@@ -132,7 +134,7 @@ async function regeneratePartial(config, hourParams) {
   const scripts = Object.keys(config.data)
   await asyncForEach(scripts, async type => {
     debug(`${gap}Process [${type}]`)
-    const content = await getData(type, hourParams)
+    const content = await getData(type, hourParams, config)
     if (!content) {
       await removeDataFromBQ(config, hourParams, type, config)
       debug(`${gap}${gap}${logSymbols.warning} No data found`)

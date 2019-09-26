@@ -34,6 +34,7 @@ module.exports = {
         user: 'XXX',
         password: 'XXX',
       },
+      md5p: 'xxxx',
     },
     live: {
       gCloud: {
@@ -51,6 +52,7 @@ module.exports = {
         user: 'XXX',
         password: 'XXX',
       },
+      md5p: 'xxxx',
     },
   },
 }
