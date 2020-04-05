@@ -20,7 +20,7 @@
     "fs-extra": "^8.0.1",
     "json2csv": "^4.3.5",
     "log-symbols": "^2.2.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "moment": "^2.24.0",
     "pg": "^7.8.1"
   },
